@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iConnect Settings</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        body {
+            background-color: #181818;
+            color: #fff;
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .settings-container {
+            background-color: #202124;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 700px;
+            width: 100%;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .settings-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .settings-form label {
+            font-weight: 500;
+        }
+
+        .settings-form input[type="text"],
+        .settings-form select {
+            background-color: #303134;
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .settings-form input[type="text"]:focus,
+        .settings-form select:focus {
+            outline: none;
+        }
+
+        .settings-form button {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .settings-form button:hover {
+            background-color: #45a049;
+        }
+        .loading {
+            display: none; /* Hidden by default */
+            margin-top: 10px;
+            font-style: italic;
+        }
+        .loading.active {
+            display: block; /* Shown when loading */
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+        .error.hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="settings-container">
+        <div class="header">
+            <h1>Settings</h1>
+        </div>
+        <form class="settings-form">
+            <label for="llm-provider">LLM Provider:</label>
+            <select id="llm-provider">
+                <option value="openai">OpenAI</option>
+                <option value="other">Other</option>
+            </select>
+
+            <label for="base-url">Base URL:</label>
+            <input type="text" id="base-url" placeholder="https://api.example.com">
+
+            <label for="api-key">API Key:</label>
+            <input type="text" id="api-key" placeholder="Your API Key">
+
+            <label for="model-name">Model Name:</label>
+            <select id="model-name">
+                <!-- Models will be loaded here -->
+            </select>
+            <label for="firebaseConfig">Firebase Config:</label>
+            <textarea id="firebaseConfig" rows="10" cols="50">
+{
+  "apiKey": "AIzaSyDBFlUQBJvboua_021Vj5iFYrKEs8pxOew",
+  "authDomain": "aitek2023-8f504.firebaseapp.com",
+  "databaseURL": "https://aitek2023-8f504-default-rtdb.firebaseio.com",
+  "projectId": "aitek2023-8f504",
+  "storageBucket": "aitek2023-8f504.appspot.com",
+  "messagingSenderId": "570516064142",
+  "appId": "1:570516064142:web:0df80782e9c63dcf5886df",
+  "measurementId": "G-554XX68W20"
+}
+            </textarea>
+            <div class="loading" id="loading-indicator">Loading models...</div>
+            <div class="error hidden" id="error-message"></div>
+            <button type="submit">Save Settings</button>
+        </form>
+    </div>
+
+    <script>
+        // Get DOM elements
+        const llmProviderSelect = document.getElementById('llm-provider');
+        const baseUrlInput = document.getElementById('base-url');
+        const apiKeyInput = document.getElementById('api-key');
+        const modelNameSelect = document.getElementById('model-name');
+        const firebaseConfigTextarea = document.getElementById('firebaseConfig');
+        const loadingIndicator = document.getElementById('loading-indicator');
+        const errorMessage = document.getElementById('error-message');
+
+        // Event listener for settings form submit
+        const settingsForm = document.querySelector('.settings-form');
+        settingsForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            loadingIndicator.classList.add('active');
+            errorMessage.classList.add('hidden');
+
+            try {
+                const baseUrl = baseUrlInput.value;
+                const apiKey = apiKeyInput.value;
+
+                const response = await fetch(`${baseUrl}/models`, {
+                    headers: {
+                        'Authorization': `Bearer ${apiKey}`
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const models = await response.json();
+                modelNameSelect.innerHTML = ''; // Clear existing options
+                models.forEach(model => {
+                    const option = document.createElement('option');
+                    option.value = model.id;
+                    option.text = model.name;
+                    modelNameSelect.appendChild(option);
+                });
+
+                // Get settings values
+                const llmProvider = llmProviderSelect.value;
+                const modelName = modelNameSelect.value;
+                const firebaseConfig = JSON.parse(firebaseConfigTextarea.value);
+
+                // Save settings (replace with actual storage mechanism - localStorage for now)
+                localStorage.setItem('llmProvider', llmProvider);
+                localStorage.setItem('baseUrl', baseUrl);
+                localStorage.setItem('apiKey', apiKey);
+                localStorage.setItem('modelName', modelName);
+                localStorage.setItem('firebaseConfig', JSON.stringify(firebaseConfig));
+
+                // Redirect back to the chat page (replace with actual navigation)
+                window.location.href = 'chat.html';
+            } catch (error) {
+                console.error("Error fetching models:", error);
+                errorMessage.textContent = `Error: ${error.message}`;
+                errorMessage.classList.remove('hidden');
+            } finally {
+                loadingIndicator.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
