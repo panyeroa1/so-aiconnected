@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="nfty" />
+  <meta name="keywords" content="nfty" />
+  <meta name="author" content="nfty" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="assets/images/logo/logo.png" type="image/x-icon" />
+  <title>nfty App</title>
+  <link rel="icon" href="assets/images/logo/logo.png" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="assets/images/logo/logo.png" />
+  <meta name="theme-color" content="#205dee" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="apple-mobile-web-app-title" content="nfty" />
+  <meta name="msapplication-TileImage" content="assets/images/logo/logo.png" />
+  <meta name="msapplication-TileColor" content="#FFFFFF" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <!--Google font-->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet" />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet" />
+
+  <!-- bootstrap css -->
+  <link rel="stylesheet" id="rtl-link" type="text/css" href="assets/css/vendors/bootstrap.css" />
+  <!-- swiper css -->
+  <link rel="stylesheet" href="assets/css/vendors/swiper-bundle.min.css" />
+
+  <!-- remixicon css -->
+  <link rel="stylesheet" type="text/css" href="assets/css/vendors/remixicon.css" />
+
+  <!-- Theme css -->
+  <link rel="stylesheet" id="change-link" type="text/css" href="assets/css/style.css" />
+</head>
+
+<body>
+
+  <!-- loader start-->
+  <div class="loader-wrapper" id="loader">
+    <div class="loader">
+      <span>N</span>
+      <span>F</span>
+      <span>T</span>
+      <span>Y</span>
+    </div>
+  </div>
+  <!-- loader end -->
+
+  <!-- page effect start -->
+  <div class="polygon-img">
+    <img class="img-fluid left-polygon" src="assets/images/svg/polygon2.svg" alt="polygon" />
+    <img class="img-fluid top-polygon" src="assets/images/svg/polygon2.svg" alt="polygon" />
+  </div>
+  <!-- page effect start -->
+
+  <!-- skip link -->
+  <a href="landing.html" class="skip-link">SKIP</a>
+  <!-- skip link -->
+
+  <!-- onboarding section start -->
+  <section class="section-lg-t-space">
+    <div class="custom-container">
+      <div class="swiper intro slider-1">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div class="index-slider">
+              <img class="img-fluid main-img" src="assets/images/onboarding/1.png" alt="index1" />
+              <h1>We are the largest <span>NFTs Marketplace</span> in the world</h1>
+            </div>
+            <a href="landing.html" class="theme-btn btn btn-sm mt-3">Getting Started</a>
+          </div>
+          <div class="swiper-slide">
+            <div class="index-slider">
+              <img class="img-fluid main-img" src="assets/images/onboarding/2.png" alt="index2" />
+              <h1><span>Buy</span> and <span>Collect</span> Yours</h1>
+              <h5>Get from the most popular NFT artists and creators around the world</h5>
+              <a href="landing.html" class="theme-btn btn btn-sm mt-3">Getting Started</a>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="index-slider">
+              <img class="img-fluid main-img" src="assets/images/onboarding/3.png" alt="index3" />
+              <div class="index-details">
+                <h1><span>Publish</span> Your <span>NFT</span> Now</h1>
+                <img class="img-fluid title-cartoon" src="assets/images/onboarding/1.png" alt="index1" />
+              </div>
+              <h5>Get from the most popular NFT artists and creators around the world</h5>
+              <a href="landing.html" class="theme-btn btn btn-sm mt-3">Getting Started</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- onboarding section end -->
+
+  <!-- bottom panel start -->
+  <div class="onboarding-bottom">
+    <!-- pagination -->
+    <div class="swiper-pagination"></div>
+    <!-- next prev buttons -->
+    <div class="page-navigation">
+      <div class="swiper-button-next">Next</div>
+      <div class="swiper-button-prev">Prev</div>
+    </div>
+  </div>
+  <!-- bottom panel end -->
+
+  <!-- panel-space start -->
+  <section class="panel-space"></section>
+  <!-- panel-space end -->
+
+
+  <!-- pwa install app popup start -->
+  <div class="offcanvas offcanvas-bottom addtohome-popup theme-offcanvas" tabindex="-1" id="offcanvas">
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    <div class="offcanvas-body small">
+      <div class="app-info">
+        <img src="assets/images/logo/48.png" class="img-fluid" alt="" />
+        <div class="content">
+          <h3>Nfty App</h3>
+          <a href="index.html#">server.aitekph.com</a>
+        </div>
+      </div>
+      <a href="index.html#!" class="btn theme-btn install-app btn-inline" id="installApp">Add to Home Screen</a>
+    </div>
+  </div>
+  <!-- pwa install app popup end -->
+
+  <!-- bootstrap js -->
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+
+  <!-- swiper js -->
+  <script src="assets/js/swiper-bundle.min.js"></script>
+  <script src="assets/js/custom-swiper.js"></script>
+
+  <!-- homescreen popup js -->
+  <script src="assets/js/homescreen-popup.js"></script>
+
+  <!-- PWA offcanvas popup js -->
+  <script src="assets/js/offcanvas-popup.js"></script>
+
+  <!-- script js -->
+  <script src="assets/js/script.js"></script>
+</body>
+
+</html>
